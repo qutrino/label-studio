@@ -70,7 +70,7 @@ class DownloadResultsAPI(APIView):
         is_labeled = not bool_from_request(request.GET, 'download_all_tasks', False)
 
         logger.debug('Get tasks')
-        query = Task.objects.filter(project=project, is_labeled=is_labeled)
+        query = Task.objects.filter(project=project) #, is_labeled=False) # Fix by Jenti
         logger.debug('Serialize tasks for export')
         tasks = ExportDataSerializer(query, many=True).data
         logger.debug('Prepare export files')
